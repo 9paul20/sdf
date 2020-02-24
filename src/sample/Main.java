@@ -1,49 +1,71 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.geometry.Pos;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.Border;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.Vistas.Buscaminas;
+import sample.Vistas.Taquimecanografo;
 
 public class Main extends Application {
-    private Button btn1, btn2, btn3, btn4;
-    private VBox vbox;
-    private HBox hbox;
+
+    MenuBar mnbProyecto;
+    Menu menCompetencia1, menCompentencia2, menSalir;
+    MenuItem mitPractica1, mitPractica2, mitBye;
+    Scene escena;
+    BorderPane brdPrincipal;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
 
-        btn1 = new Button("Botón 1");
-        btn1.setPrefWidth(150);
-        btn2 = new Button("Botón 2");
-        btn2.setPrefWidth(150);
-        btn3 = new Button("Botón 3");
-        btn3.setPrefWidth(70);
-        btn4 = new Button("Botón 4");
-        btn4.setPrefWidth(70);
+        brdPrincipal = new BorderPane();
+        mnbProyecto = new MenuBar();
+        brdPrincipal.setTop(mnbProyecto);
 
-        vbox = new VBox();
-        hbox = new HBox();
+        menCompetencia1 = new Menu("1er. Competencia");
+        menCompentencia2 = new Menu("2da. Competencia");
+        menSalir = new Menu("Salir");
 
-        vbox.getChildren().addAll(btn1, btn2);
-        hbox.getChildren().addAll(btn3, btn4);
-        vbox.getChildren().add(hbox);
+        mitPractica1 = new MenuItem("Buscaminas");
+        mitPractica1.setOnAction(event -> OpcionMenu(1));
+        mitPractica2 = new MenuItem("Taquimecanografo");
+        mitPractica2.setOnAction(event -> OpcionMenu(2));
+        mitBye = new MenuItem("Bye");
+        mitBye.setOnAction(event -> OpcionMenu(20));
 
-        vbox.setSpacing(10);
-        hbox.setSpacing(10);
+        menCompetencia1.getItems().addAll(mitPractica1, mitPractica2);
+        menSalir.getItems().add(mitBye);
 
-        vbox.setAlignment(Pos.CENTER);
-        hbox.setAlignment(Pos.CENTER);
-
+        // Cargamos los menus al menubar
+        mnbProyecto.getMenus().addAll(menCompetencia1,menCompentencia2,menSalir);
+        escena = new Scene(brdPrincipal, 400, 400);
+        escena.getStylesheets().add("sample/Estilos/Estilos_principal.css");
         primaryStage.setMaximized(true);
-        primaryStage.setTitle("Tópicos Avanzados de Programación :)");
-        primaryStage.setScene(new Scene(vbox, 300, 275));
+        primaryStage.setTitle("Adioz Topicos :)");
+        primaryStage.setScene(escena);
         primaryStage.show();
+    }
+
+    private void OpcionMenu(int i) {
+        switch (i){
+            case 1:
+                new Buscaminas();
+                break;
+            case 2:
+                new Taquimecanografo();
+                break;
+            case 20:
+                System.exit(0);
+        }
     }
 
 

@@ -1,0 +1,8 @@
+.root{
+    -fx-background-image: url('../Imagenes/613501.jpg');
+    -fx-background-size: cover, auto;
+}
+
+.menu-bar{
+    -fx-background-color: #FFE3A7;
+}
